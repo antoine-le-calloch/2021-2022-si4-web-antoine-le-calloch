@@ -1,30 +1,51 @@
 <template>
   <div class="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld :msg="'Welcome to Your Vue.JS App'"/>
+    <Header></Header>
+    <Messages></Messages>
+    <Menu></Menu>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Messages from "./components/Messages.vue";
+import Menu from "./components/Menu.vue";
+import Header from "./components/Header.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    Messages,
+    Menu,
+    Header,
   }
 };
-</script> 
+</script>
 
 <style>
-html, body {
+html{
+  background-image: url("assets/phone.png");
+  background-size: 1350px 640px;
+  background-repeat: no-repeat;
+}
+body {
   height: 100%;
 }
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+.app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  text-align: left;
+  position: absolute;
+  left: 507px;
+  top: 40px;
+  width: 336px;
+  height: 569px;
+  border-radius: 31px;
+  padding-bottom: 20px;
 }
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
 </style>
