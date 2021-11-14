@@ -1,23 +1,26 @@
 <template>
-  <div class="message">
-    <img v-bind:src="getImage" alt="profile image" height=100%>
-    <div class="text">
-      <template class="messageLue" v-if="getIsRead">
-        <h1>{{getFullName}}</h1>
-        <h2>{{getContent}}</h2>
-      </template>
-      <template class="messageNonLue" v-else>
-        <h3>{{getFullName}}</h3>
-        <h4>{{getContent}}</h4>
-      </template>
+  <span v-touch:swipe.left="swipeItemLeft"
+        v-touch:swipe.right="swipeItemRight">
+    <div class="message">
+      <img v-bind:src="getImage" alt="profile image" height=100%>
+      <div class="text">
+        <template class="messageLue" v-if="getIsRead">
+          <h1>{{getFullName}}</h1>
+          <h2>{{getContent}}</h2>
+        </template>
+        <template class="messageNonLue" v-else>
+          <h3>{{getFullName}}</h3>
+          <h4>{{getContent}}</h4>
+        </template>
+      </div>
+      <div class="date">
+        {{getTime}}
+        <template class="messageNonLue" v-if="!getIsRead">
+          <i class="fas fa-circle fa-xs"></i>
+        </template>
+      </div>
     </div>
-    <div class="date">
-      {{getTime}}
-      <template class="messageNonLue" v-if="!getIsRead">
-        <i class="fas fa-circle"></i>
-      </template>
-    </div>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -25,6 +28,23 @@ export default {
   name: "Message",
   props: {
     message : Object,
+  },
+  data() {
+    return {
+      translation: Number,
+    }
+  },
+  methods: {
+    swipeItemLeft(){
+      const root = document.querySelector(':root');
+      root.style.setProperty('--distance', '-100px');
+      console.log("left");
+    },
+    swipeItemRight() {
+      const root = document.querySelector(':root');
+      root.style.setProperty('--distance', '0px');
+      console.log("right");
+    }
   },
   computed: {
     getFullName(){
@@ -44,86 +64,18 @@ export default {
       return this.message.read;
     }
   }
-  var SwipeToRevealOptions = require('react-swipe-to-reveal-options');
-
-  var App = React.createClass({
-    render() {
-      var items = [
-        {
-          leftOptions: [{
-            label: 'Trash',
-            class: 'trash'
-          }],
-          rightOptions: [{
-            label: 'Move',
-            class: 'move',
-          },{
-            label: 'Archive',
-            class: 'archive',
-          }],
-          content: "Mail from Mathieu",
-          callActionWhenSwipingFarLeft: true,
-          callActionWhenSwipingFarRight: true
-        },
-        {
-          leftOptions: [{
-            label: 'Trash',
-            class: 'trash'
-          }],
-          rightOptions: [{
-            label: 'Move',
-            class: 'move',
-          },{
-            label: 'Archive',
-            class: 'archive',
-          }],
-          content: "Mail from Arseny",
-          callActionWhenSwipingFarRight: true,
-          callActionWhenSwipingFarLeft: false
-        },
-        {
-          leftOptions: [{
-            label: 'Trash',
-            class: 'trash'
-          }],
-          rightOptions: [{
-            label: 'Move',
-            class: 'move',
-          },{
-            label: 'Archive',
-            class: 'archive',
-          }],
-          content: "Mail from Bruno",
-          callActionWhenSwipingFarRight: false,
-          callActionWhenSwipingFarLeft: false
-        }
-      ];
-      return (
-          <div>
-            items.map(function(item) {
-            return (
-            <SwipeToRevealOptions
-            leftOptions={item.leftOptions}
-            rightOptions={item.rightOptions}
-            callActionWhenSwipingFarRight={item.callActionWhenSwipingFarRight}
-            callActionWhenSwipingFarLeft={item.callActionWhenSwipingFarLeft}
-            >
-          {item.content}
-            </SwipeToRevealOptions>
-            );
-          })
-          </div>
-      );
-    },
-
-  });
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+:root {
+  --distance: 0px;
+}
 .message {
   display: flex;
+  transform: translateX(var(--distance));
+  transition: 1s;
 }
 img {
   width: 40px;
@@ -148,7 +100,6 @@ h3 {
 }
 h4 {
   font: bold small "San Francisco", sans-serif;
-  color: darkgray;
   margin: 1px;
 }
 .date{
