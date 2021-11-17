@@ -1,8 +1,8 @@
 <template>
   <div class="messageCard">
-    <span v-touch:swipe.left="swipeItemLeft"
-          v-touch:swipe.right="swipeItemRight">
-      <div class="message">
+    <span v-touch:swipe.left="itemOnLeft"
+          v-touch:swipe.right="itemOnRight">
+      <div class="message" v-bind:class="{ messageOnLeft: elementOnLeft, messageOnRight: !elementOnLeft }">
         <img v-bind:src="getImage" alt="profile image" height=100%>
         <div class="text">
           <template class="messageLue" v-if="getIsRead">
@@ -36,18 +36,16 @@ export default {
   },
   data() {
     return {
-      elementOnLeft : Boolean,
+      elementOnLeft : false,
     }
   },
   methods: {
-    swipeItemLeft(){
-      const root = document.querySelector('.messageCard');
-      root.style.setProperty('--distance', '-70px');
+    itemOnLeft(){
+      this.elementOnLeft = true;
       console.log("left" + this.message.id);
     },
-    swipeItemRight() {
-      const root = document.querySelector('.messageCard');
-      root.style.setProperty('--distance', '0px');
+    itemOnRight() {
+      this.elementOnLeft = false;
       console.log("right" + this.message.id);
     }
   },
@@ -74,18 +72,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-:root{
-}
 .messageCard{
-  --distance: 0px;
   display: flex;
   background-color: #a9a9a9;
+}
+.messageOnLeft {
+  transform: translateX(-70px);
+}
+.messageOnRight {
+  transform: translateX(0px);
 }
 .message {
   user-select: none;
   position: relative;
   display: flex;
-  transform: translateX(var(--distance));
   transition: 1s;
   width: 328px;
   background: white;
@@ -98,7 +98,7 @@ img {
   margin: 6px;
 }
 h1 {
-  font: normal medium "San Francisco", sans-serif;
+  font: medium "San Francisco", sans-serif;
   text-align: left;
   margin: 3px;
 }

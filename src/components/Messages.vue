@@ -3,22 +3,22 @@
     <div class="messagesHeader">
       All | Favorites | Channels
     </div>
-    <Message v-for="currentMessage in listMessage" :key="currentMessage.id" :message="currentMessage"/>
+    <Message v-for="currentMessage in messages" :key="currentMessage.id" :message="currentMessage"/>
   </div>
 </template>
 
 <script>
 import Message from "./Message.vue";
-import { messagesMock } from "@/mocks/messages.mock";
 
 export default {
   name: "Messages",
   components: {
     Message,
   },
-  data() {
-    return{
-      listMessage: messagesMock,
+  computed: {
+    messages(){
+      console.log(this.$store.state.messages)
+      return this.$store.messagesSortedByDate();
     }
   }
 };

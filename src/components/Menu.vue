@@ -39,5 +39,4 @@ export default {
 .fa-credit-card{
   margin-right: 10%;
 }
-.fa-cog{}
 </style>
