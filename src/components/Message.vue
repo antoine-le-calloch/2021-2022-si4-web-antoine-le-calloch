@@ -1,26 +1,31 @@
 <template>
-  <span v-touch:swipe.left="swipeItemLeft"
-        v-touch:swipe.right="swipeItemRight">
-    <div class="message">
-      <img v-bind:src="getImage" alt="profile image" height=100%>
-      <div class="text">
-        <template class="messageLue" v-if="getIsRead">
-          <h1>{{getFullName}}</h1>
-          <h2>{{getContent}}</h2>
-        </template>
-        <template class="messageNonLue" v-else>
-          <h3>{{getFullName}}</h3>
-          <h4>{{getContent}}</h4>
-        </template>
+  <div class="messageCard">
+    <span v-touch:swipe.left="swipeItemLeft"
+          v-touch:swipe.right="swipeItemRight">
+      <div class="message">
+        <img v-bind:src="getImage" alt="profile image" height=100%>
+        <div class="text">
+          <template class="messageLue" v-if="getIsRead">
+            <h1>{{getFullName}}</h1>
+            <h2>{{getContent}}</h2>
+          </template>
+          <template class="messageNonLue" v-else>
+            <h3>{{getFullName}}</h3>
+            <h4>{{getContent}}</h4>
+          </template>
+        </div>
+        <div class="date">
+          {{getTime}}
+          <template class="messageNonLue" v-if="!getIsRead">
+            <i class="fas fa-circle fa-xs"></i>
+          </template>
+        </div>
       </div>
-      <div class="date">
-        {{getTime}}
-        <template class="messageNonLue" v-if="!getIsRead">
-          <i class="fas fa-circle fa-xs"></i>
-        </template>
-      </div>
+    </span>
+    <div class="messageSettings">
+      <i class="fas fa-ellipsis-h"></i>
     </div>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -31,19 +36,19 @@ export default {
   },
   data() {
     return {
-      translation: Number,
+      elementOnLeft : Boolean,
     }
   },
   methods: {
     swipeItemLeft(){
-      const root = document.querySelector(':root');
-      root.style.setProperty('--distance', '-100px');
-      console.log("left");
+      const root = document.querySelector('.messageCard');
+      root.style.setProperty('--distance', '-70px');
+      console.log("left" + this.message.id);
     },
     swipeItemRight() {
-      const root = document.querySelector(':root');
+      const root = document.querySelector('.messageCard');
       root.style.setProperty('--distance', '0px');
-      console.log("right");
+      console.log("right" + this.message.id);
     }
   },
   computed: {
@@ -69,13 +74,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-:root {
+:root{
+}
+.messageCard{
   --distance: 0px;
+  display: flex;
+  background-color: #a9a9a9;
 }
 .message {
+  user-select: none;
+  position: relative;
   display: flex;
   transform: translateX(var(--distance));
   transition: 1s;
+  width: 328px;
+  background: white;
+  z-index: 1;
 }
 img {
   width: 40px;
@@ -107,5 +121,22 @@ h4 {
 }
 .fa-circle{
   color: #1e78ff;
+}
+.messageSettings{
+  position: relative;
+  top: 12px;
+  right: 53px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  background: white;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fa-ellipsis-h{
+  vertical-align: middle;
+  color: #a9a9a9;
 }
 </style>

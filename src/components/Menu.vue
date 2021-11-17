@@ -4,7 +4,7 @@
     <i class="fas fa-phone"></i>
     <i class="fas fa-comment-dots"></i>
     <i class="fas fa-credit-card"></i>
-    <i class="fas fa-ellipsis-h"></i>
+    <i class="fas fa-cog"></i>
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
   text-align: center;
   border-top: solid lightblue;
   font: bold x-large Arial, sans-serif;
+  color: darkgray;
 }
 .fa-address-book{
   margin-top: 3%;
@@ -38,5 +39,5 @@ export default {
 .fa-credit-card{
   margin-right: 10%;
 }
-.fa-ellipsis-h{}
+.fa-cog{}
 </style>

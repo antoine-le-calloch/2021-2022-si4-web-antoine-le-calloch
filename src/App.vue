@@ -24,7 +24,7 @@ export default {
 <style>
 html{
   background-image: url("assets/phone.png");
-  background-size: 1350px 640px;
+  background-size: 1350px 650px;
   background-repeat: no-repeat;
 }
 body {

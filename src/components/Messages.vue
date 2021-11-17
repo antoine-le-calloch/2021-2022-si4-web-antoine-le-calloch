@@ -30,10 +30,11 @@ export default {
 .messages {
   height: 440px;
   padding: 4px;
+  overflow: hidden;
+
 }
 .messagesHeader{
   border-bottom: solid lightblue;
-}
-h1 {
+  font: normal medium "San Francisco", sans-serif;
 }
 </style>

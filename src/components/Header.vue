@@ -1,11 +1,16 @@
 <template>
   <div class="header">
-    <b class="hour">
-      {{getTime}}
-    </b>
-    <i class='fas fa-signal'></i>
-    <i class="fas fa-wifi"></i>
-    <i class="fas fa-battery-full"></i>
+    <div class="headBand">
+      <b class="hour">
+        {{getTime}}
+      </b>
+      <i class='fas fa-signal'></i>
+      <i class="fas fa-wifi"></i>
+      <i class="fas fa-battery-full"></i>
+    </div>
+    <div class="headApp">
+      <h1>Chats</h1>
+    </div>
   </div>
 </template>
 
@@ -15,7 +20,7 @@ export default {
   computed: {
     getTime() {
       const actualTime = new Date();
-      return actualTime.getHours() + ":" + actualTime.getMinutes();
+      return actualTime.getHours() + ":" + (actualTime.getMinutes()<10?'0':'') + actualTime.getMinutes();
     }
   }
 };
@@ -25,14 +30,23 @@ export default {
 <style scoped>
 .header {
   height: 70px;
-  padding-right: 25px;
-  padding-left: 25px;
   padding-top: 5px;
+}
+.headBand{
+  height: 40px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around
+  padding-right: 25px;
+  padding-left: 25px;
+  justify-content: space-around;
 }
 .hour{
   width: 205px;
+}
+h1 {
+  font: bold x-large "San Francisco", sans-serif;
+  margin: 1px;
+  text-align: left;
+  padding-left: 3px;
 }
 </style>
