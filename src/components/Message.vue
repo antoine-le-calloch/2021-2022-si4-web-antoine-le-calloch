@@ -5,7 +5,7 @@
       <div class="message" v-bind:class="{ messageOnLeft: elementOnLeft, messageOnRight: !elementOnLeft }">
         <img v-bind:src="getImage" alt="profile image" height=100%>
         <div class="text">
-          <template class="messageLue" v-if="getIsRead">
+          <template class="messageLue" v-if="isRead">
             <h1>{{getFullName}}</h1>
             <h2>{{getContent}}</h2>
           </template>
@@ -16,14 +16,32 @@
         </div>
         <div class="date">
           {{getTime}}
-          <template class="messageNonLue" v-if="!getIsRead">
+          <template class="messageNonLue" v-if="!isRead">
             <i class="fas fa-circle fa-xs"></i>
           </template>
         </div>
       </div>
     </span>
     <div class="messageSettings">
-      <i class="fas fa-ellipsis-h"></i>
+      <div class="settingsButton" v-on:click="this.seeSettings = ~this.seeSettings">
+        <div class="fas fa-ellipsis-h">
+          <div class="options" v-bind:class="{ displayOptions: seeSettings, hiddenOptions: !seeSettings}">
+            <div class="lu-nonLu" v-on:click="markAsReadOrNotRead">
+              <template v-if="isRead">
+                Marquer comme non lu
+                <i class="far fa-envelope"></i>
+              </template>
+              <template v-else>
+                Marquer comme lu
+                <i class="far fa-envelope-open"></i>
+              </template>
+            </div>
+            <div class="delete"  v-on:click="del">
+              Supprimer
+              <i class="fas fa-trash"></i></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,16 +55,23 @@ export default {
   data() {
     return {
       elementOnLeft : false,
+      seeSettings : false
     }
   },
   methods: {
     itemOnLeft(){
       this.elementOnLeft = true;
-      console.log("left" + this.message.id);
     },
     itemOnRight() {
       this.elementOnLeft = false;
-      console.log("right" + this.message.id);
+    },
+    del() {
+      this.elementOnLeft = !this.elementOnLeft;
+      this.$emit("del");
+    },
+    markAsReadOrNotRead() {
+      this.elementOnLeft = !this.elementOnLeft;
+      this.$emit("changeReadEvent");
     }
   },
   computed: {
@@ -63,7 +88,7 @@ export default {
       const actualTime = new Date(this.message.date);
       return actualTime.getHours() + ":" + (actualTime.getMinutes()<10?'0':'') + actualTime.getMinutes();
     },
-    getIsRead(){
+    isRead(){
       return this.message.read;
     }
   }
@@ -123,20 +148,59 @@ h4 {
   color: #1e78ff;
 }
 .messageSettings{
+  width: 70px;
+  height: 70px;
   position: relative;
-  top: 12px;
-  right: 53px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
-  background: white;
+  right: 70px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.settingsButton{
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .fa-ellipsis-h{
-  vertical-align: middle;
   color: #a9a9a9;
+}
+.hiddenOptions{
+  display: none;
+}
+.displayOptions{
+  display: flex;
+}
+.options {
+  user-select: none;
+  color: black;
+  position: absolute;
+  right: 52px;
+  bottom: -45px;
+  width: 220px;
+  height: 40px;
+  background-color: white;
+  border-radius: 2px;
+  font: normal small "San Francisco", sans-serif;
+  box-shadow: 0 0 5px lightgray;
+  flex-direction:column;
+  justify-content: space-around;
+  z-index: 5;
+}
+.options > .lu-nonLu{
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid darkgrey;
+}
+.options > .delete{
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  color: red;
 }
 </style>

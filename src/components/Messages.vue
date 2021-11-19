@@ -3,7 +3,11 @@
     <div class="messagesHeader">
       All | Favorites | Channels
     </div>
-    <Message v-for="currentMessage in messages" :key="currentMessage.id" :message="currentMessage"/>
+    <Message v-for="currentMessage in messages"
+             :key="currentMessage.id"
+             :message="currentMessage"
+             v-on:changeReadEvent="markAsReadOrNotRead(currentMessage)"
+             v-on:del="del(currentMessage)"/>
   </div>
 </template>
 
@@ -15,10 +19,17 @@ export default {
   components: {
     Message,
   },
+  methods: {
+    markAsReadOrNotRead(message){
+      message.read = !message.read;
+    },
+    del(message){
+      console.log("Le message " + message.id + " est supprimé");
+    }
+  },
   computed: {
     messages(){
-      console.log(this.$store.state.messages)
-      return this.$store.messagesSortedByDate();
+      return this.$store.getters.messagesSortedByDate;
     }
   }
 };
@@ -31,7 +42,6 @@ export default {
   height: 440px;
   padding: 4px;
   overflow: hidden;
-
 }
 .messagesHeader{
   border-bottom: solid lightblue;

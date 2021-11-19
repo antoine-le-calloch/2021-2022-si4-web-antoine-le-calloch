@@ -8,7 +8,7 @@ export default createStore({
         }
     },
     mutations: {
-        setMessages: (state, payload) => state.messages = payload
+        setMessages: (state, payload) => {state.messages = payload},
     },
     getters: {
         numberOfUnreadMessages: (state) =>{
@@ -17,8 +17,11 @@ export default createStore({
             return nbUnreadMessage;
         },
         messagesSortedByDate: (state) =>{
-            state.messages.sort(message => message.date);
-            return null;
+            function compareDates(a, b) {
+                return new Date(a.date) - new Date(b.date);
+            }
+            state.messages.sort(compareDates);
+            return state.messages;
         }
     }
 })
