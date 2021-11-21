@@ -35,13 +35,9 @@ export default {
 .headBand{
   height: 40px;
   display: flex;
-  flex-wrap: wrap;
   padding-right: 25px;
   padding-left: 25px;
-  justify-content: space-around;
-}
-.hour{
-  width: 205px;
+  justify-content: space-between;
 }
 h1 {
   font: bold x-large "San Francisco", sans-serif;

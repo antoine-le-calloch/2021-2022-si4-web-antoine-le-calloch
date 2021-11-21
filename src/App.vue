@@ -1,20 +1,20 @@
 <template>
-  <div class="app">
-    <Header></Header>
-    <Messages></Messages>
-    <Menu></Menu>
+  <div class="phone">
+    <div class="app">
+      <Header></Header>
+      <router-view></router-view>
+      <Menu></Menu>
+    </div>
   </div>
 </template>
 
 <script>
-import Messages from "./components/Messages.vue";
 import Menu from "./components/Menu.vue";
 import Header from "./components/Header.vue";
 
 export default {
   name: "App",
   components: {
-    Messages,
     Menu,
     Header,
   }
@@ -22,25 +22,36 @@ export default {
 </script>
 
 <style>
-html{
-  background-image: url("assets/phone.png");
-  background-size: 1350px 650px;
-  background-repeat: no-repeat;
-}
+html{}
 body {
-  height: 100%;
+  margin: 0;
+  background-image: url("assets/fond.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.phone{
+  background-image: url("assets/phoneSeul.png");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57vh;
+  height: 100vh;
 }
 .app {
+  background-color: red;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  position: absolute;
-  left: 507px;
-  top: 40px;
-  width: 336px;
-  height: 569px;
   border-radius: 31px;
-  padding-bottom: 20px;
+  margin: 7vh;
+  min-height: 0;
+  height: border-box;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 @font-face {
   font-family: "San Francisco";

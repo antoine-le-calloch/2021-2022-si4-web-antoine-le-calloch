@@ -66,12 +66,12 @@ export default {
       this.elementOnLeft = false;
     },
     del() {
-      this.elementOnLeft = !this.elementOnLeft;
+      this.elementOnLeft = false;
       this.$emit("del");
     },
     markAsReadOrNotRead() {
-      this.elementOnLeft = !this.elementOnLeft;
-      this.$emit("changeReadEvent");
+      this.elementOnLeft = false;
+      this.$emit("updateReadEvent");
     }
   },
   computed: {
@@ -102,7 +102,7 @@ export default {
   background-color: #a9a9a9;
 }
 .messageOnLeft {
-  transform: translateX(-70px);
+  transform: translateX(-50px);
 }
 .messageOnRight {
   transform: translateX(0px);
@@ -112,34 +112,42 @@ export default {
   position: relative;
   display: flex;
   transition: 1s;
-  width: 328px;
   background: white;
   z-index: 1;
 }
 img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 25px;
   margin: 6px;
 }
-h1 {
+.text{
+  min-width: 0;
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+.text > h1 {
   font: medium "San Francisco", sans-serif;
   text-align: left;
   margin: 3px;
 }
-h2 {
+.text > h2 {
   font: normal small "San Francisco", sans-serif;
   color: darkgray;
   margin: 1px;
+  overflow: hidden;
+  text-overflow: "...";
 }
-h3 {
+.text > h3 {
   font: bold medium "San Francisco", sans-serif;
   text-align: left;
   margin: 3px;
 }
-h4 {
+.text > h4 {
   font: bold small "San Francisco", sans-serif;
   margin: 1px;
+  overflow: hidden;
+  text-overflow: "...";
 }
 .date{
   margin: 6px;
@@ -148,18 +156,17 @@ h4 {
   color: #1e78ff;
 }
 .messageSettings{
-  width: 70px;
-  height: 70px;
+  width: 50px;
   position: relative;
-  right: 70px;
+  right: 50px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .settingsButton{
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50px;
   background: white;
   display: flex;
@@ -187,7 +194,7 @@ h4 {
   border-radius: 2px;
   font: normal small "San Francisco", sans-serif;
   box-shadow: 0 0 5px lightgray;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: space-around;
   z-index: 5;
 }
