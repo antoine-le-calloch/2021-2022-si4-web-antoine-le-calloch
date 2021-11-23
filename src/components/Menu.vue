@@ -26,39 +26,40 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .menu {
-  text-align: center;
-  border-top: solid lightblue;
-  font: bold x-large Arial, sans-serif;
+  position: absolute;
+  top: 79.5vh;
+  width: 100%;
+  font-size: 4vh;
   color: darkgray;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding-top: 10px;
+  padding-top: 1.5vh;
+  border-top: 0.4vh solid lightblue;
 }
 .fa-comment-dots{
+  width: 4vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 24px;
-  width: 24px;
+  text-decoration: none;
 }
 .fa-comment-dots::before{
   position: absolute;
 }
 .fa-comment-dots > span{
   z-index: 1;
-  border-radius: 50px;
-  width: 15px;
-  height: 15px;
-  border: 2px solid white;
+  border-radius: 1vh;
+  width: 2vh;
+  height: 2vh;
+  border: 0.4vh solid white;
   background: red;
   position: relative;
-  left: 9px;
-  bottom: 13px;
+  left: 1.6vh;
+  bottom: 2vh;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font: bold 12px Arial, sans-serif;
+  font: bold 2vh Arial, sans-serif;
 }
 </style>

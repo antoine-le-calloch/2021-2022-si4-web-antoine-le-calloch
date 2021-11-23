@@ -32,7 +32,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .contacts{
-  height: 448px;
+  height: 67.4vh;
   overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: none;

@@ -1,7 +1,8 @@
 <template>
   <div class="phone">
-    <div class="app">
-      <Header></Header>
+    <div class="screen">
+      <PhoneHeader></PhoneHeader>
+      <AppHeader></AppHeader>
       <router-view></router-view>
       <Menu></Menu>
     </div>
@@ -9,14 +10,16 @@
 </template>
 
 <script>
+import PhoneHeader from "./components/PhoneHeader.vue";
+import AppHeader from "./components/AppHeader.vue";
 import Menu from "./components/Menu.vue";
-import Header from "./components/Header.vue";
 
 export default {
   name: "App",
   components: {
-    Menu,
-    Header,
+    PhoneHeader,
+    AppHeader,
+    Menu
   }
 };
 </script>
@@ -30,6 +33,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 .phone{
   background-image: url("assets/phoneSeul.png");
@@ -40,18 +45,16 @@ body {
   width: 57vh;
   height: 100vh;
 }
-.app {
-  background-color: red;
+.screen {
+  position: relative;
+  top: 0.8vh;
+  left: 0.3vh;
+  width: 91%;
+  height: 89.5%;
+  border-radius: 5vh;
+  text-align: left;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  border-radius: 31px;
-  margin: 7vh;
-  min-height: 0;
-  height: border-box;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
 }
 @font-face {
   font-family: "San Francisco";

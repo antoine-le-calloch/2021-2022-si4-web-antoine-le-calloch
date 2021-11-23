@@ -1,18 +1,22 @@
 <template>
-  <div class="messagesHeader">
-    All | Favorites | Channels
-  </div>
   <div class="messages">
-    <Message v-for="currentMessage in messages"
-             :key="currentMessage.id"
-             :message="currentMessage"
-             v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"
-             v-on:del="del(currentMessage)"/>
-    <Message v-for="currentMessage in messages"
-             :key="currentMessage.id"
-             :message="currentMessage"
-             v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"
-             v-on:del="del(currentMessage)"/>
+    <div class="messagesHeader">
+      <div class="All">All</div>
+      <div class="Favorites">Favorites</div>
+      <div class="Channels">Channels</div>
+    </div>
+    <div class="messagesList">
+      <Message v-for="currentMessage in messages"
+               :key="currentMessage.id"
+               :message="currentMessage"
+               v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"
+               v-on:del="del(currentMessage)"/>
+      <Message v-for="currentMessage in messages"
+               :key="currentMessage.id"
+               :message="currentMessage"
+               v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"
+               v-on:del="del(currentMessage)"/>
+    </div>
   </div>
 </template>
 
@@ -25,7 +29,10 @@ export default {
     Message,
   },
   created(){
-    this.$store.dispatch('setMessages');
+    if(this.isStart){
+      this.isStart = false;
+      this.$store.dispatch('setMessages');
+    }
   },
   methods: {
     markAsReadOrNotRead(message){
@@ -46,21 +53,33 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.messagesHeader{
-  padding: 4px;
+.messages{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.messages {
-  padding: 4px;
+.messagesHeader{
+  display: flex;
+  justify-content: space-around;
+  width: 25vh;
+  padding: 0.5vh;
+  font: normal 2.2vh "San Francisco", sans-serif;
+}
+.All{
+  border-bottom: 0.4vh solid deepskyblue;
+  color: deepskyblue;
+}
+.messagesList {
+  width: 100%;
+  height: 63.5vh;
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
   scrollbar-width: none;
 }
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
-}
-.messagesHeader{
-  border-bottom: solid lightblue;
-  font: normal medium "San Francisco", sans-serif;
 }
 </style>

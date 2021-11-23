@@ -1,22 +1,17 @@
 <template>
-  <div class="header">
-    <div class="headBand">
-      <b class="hour">
-        {{getTime}}
-      </b>
+  <div class="phoneHeader">
+    <div class="hour">{{getTime}}</div>
+    <div class="icons">
       <i class='fas fa-signal'></i>
       <i class="fas fa-wifi"></i>
       <i class="fas fa-battery-full"></i>
-    </div>
-    <div class="headApp">
-      <h1>Chats</h1>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Header",
+  name: "PhoneHeader",
   computed: {
     getTime() {
       const actualTime = new Date();
@@ -28,21 +23,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.header {
-  height: 70px;
-  padding-top: 5px;
-}
-.headBand{
-  height: 40px;
+.phoneHeader{
   display: flex;
-  padding-right: 25px;
-  padding-left: 25px;
   justify-content: space-between;
+  margin-left: 3vh;
+  margin-right: 3vh;
+  margin-top: 1vh;
 }
-h1 {
-  font: bold x-large "San Francisco", sans-serif;
-  margin: 1px;
-  text-align: left;
-  padding-left: 3px;
+.hour{
+  font: bold 3vh "San Francisco", sans-serif;
+}
+.icons{
+  width: 13vh;
+  font-size: 3vh;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
