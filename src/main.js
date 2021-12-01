@@ -5,5 +5,5 @@ import App from './App.vue'
 import router from './router.js'
 
 createApp(App).use(store).use(router).use(Vue3TouchEvents, {
-    swipeTolerance: 20
+    swipeTolerance: 20,
 }).mount('#app')

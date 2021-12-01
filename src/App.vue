@@ -2,29 +2,26 @@
   <div class="phone">
     <div class="screen">
       <PhoneHeader></PhoneHeader>
-      <AppHeader></AppHeader>
       <router-view></router-view>
-      <Menu></Menu>
     </div>
   </div>
 </template>
 
 <script>
 import PhoneHeader from "./components/PhoneHeader.vue";
-import AppHeader from "./components/AppHeader.vue";
-import Menu from "./components/Menu.vue";
 
 export default {
   name: "App",
   components: {
-    PhoneHeader,
-    AppHeader,
-    Menu
+    PhoneHeader
   }
 };
 </script>
 
 <style>
+:root{
+  --principalPage-Body-Height: 66vh;
+}
 html{}
 body {
   margin: 0;

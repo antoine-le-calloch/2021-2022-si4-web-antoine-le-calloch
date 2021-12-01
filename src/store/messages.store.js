@@ -8,7 +8,10 @@ export const messagesModule = {
         }
     },
     mutations: {
-        setMessages: (state, payload) => {state.messages = payload},
+        setMessages: (state, payload) => {
+            if(!state.messages.length)
+                state.messages = payload
+        },
     },
     getters: {
         numberOfUnreadMessages: (state) =>{

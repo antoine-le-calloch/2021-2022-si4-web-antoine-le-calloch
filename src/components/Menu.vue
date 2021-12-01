@@ -1,8 +1,8 @@
 <template>
   <div class="menu">
-    <router-link to="/contacts"  class="fas fa-address-book"></router-link>
+    <router-link to="/principalPage/contacts"  class="fas fa-address-book"></router-link>
     <i class="fas fa-phone"></i>
-    <router-link to="/messages" class="fas fa-comment-dots">
+    <router-link to="/principalPage/messages" class="fas fa-comment-dots">
       <span v-if="nbUnreadMessages > 0">
         {{nbUnreadMessages}}
       </span>

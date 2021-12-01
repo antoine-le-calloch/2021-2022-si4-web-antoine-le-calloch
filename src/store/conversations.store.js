@@ -1,37 +1,45 @@
 import axios from "axios";
 
-export const messagesModule = {
+export const conversationsModule = {
     namespace: false,
     state(){
         return {
-            messages: [],
+            conversations: new Map(),
         }
     },
     mutations: {
-        setMessages: (state, payload) => {
-            if(!state.messages.length)
-                state.messages = payload
+        setConversations: (state, payload) => {
+            if(!state.conversations.length)
+                state.conversations = payload;
         },
+        addSmsToOneConversation: (state, payload) => {
+            state.conversations.get(payload.id).push({
+                id: 0,
+                content: payload.txt,
+                read: false,
+                date: new Date()
+            });
+        }
     },
     getters: {
-        numberOfUnreadMessages: (state) =>{
-            let nbUnreadMessage = 0;
-            state.messages.forEach(message =>{if(!message.read){nbUnreadMessage++}});
-            return nbUnreadMessage;
-        },
-        messagesSortedByDate: (state) =>{
+        OneSortedConversation: (state) => (messageId) => {
             function compareDates(a, b) {
                 return new Date(a.date) - new Date(b.date);
             }
-            state.messages.sort(compareDates);
-            return state.messages;
+            state.conversations.get(messageId).sort(compareDates);
+            return state.conversations.get(messageId);
         }
     },
     actions: {
-        async setMessages(context){
+        async setConversations(context){
             try{
-                const response = await axios.get("https://io-labs.fr/messenger/messages.json");
-                context.commit('setMessages', response.data);
+                const response = await axios.get("https://raw.githubusercontent.com/NablaT/test-api/master/assets/conversation");
+                const messages = context.getters.messagesSortedByDate;
+                const conversations = new Map();
+                for (let i = 0; i < messages.length; i++) {
+                    conversations.set(messages[i].id, Array.from(response.data.messages));
+                }
+                context.commit('setConversations', conversations);
             }
             catch (error){
                 console.log('error: ', error);

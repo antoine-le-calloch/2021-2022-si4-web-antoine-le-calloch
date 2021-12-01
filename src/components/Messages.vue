@@ -1,16 +1,16 @@
 <template>
   <div class="messages">
     <div class="messagesHeader">
-      <div class="All">All</div>
-      <div class="Favorites">Favorites</div>
-      <div class="Channels">Channels</div>
+      <div class="tabTitle">
+        <h1>Chats</h1>
+      </div>
+      <div class="tabOptions">
+        <div class="All">All</div>
+        <div class="Favorites">Favorites</div>
+        <div class="Channels">Channels</div>
+      </div>
     </div>
     <div class="messagesList">
-      <Message v-for="currentMessage in messages"
-               :key="currentMessage.id"
-               :message="currentMessage"
-               v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"
-               v-on:del="del(currentMessage)"/>
       <Message v-for="currentMessage in messages"
                :key="currentMessage.id"
                :message="currentMessage"
@@ -29,10 +29,8 @@ export default {
     Message,
   },
   created(){
-    if(this.isStart){
-      this.isStart = false;
-      this.$store.dispatch('setMessages');
-    }
+    this.$store.dispatch('setMessages');
+    this.$store.dispatch('setConversations');
   },
   methods: {
     markAsReadOrNotRead(message){
@@ -58,11 +56,18 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.messagesHeader{
-  display: flex;
-  justify-content: space-around;
+h1 {
+  margin-left: 1vh;
+  margin-top: 3vh;
+  margin-bottom: 0;
+  font: bold 3.5vh "San Francisco", sans-serif;
+  text-align: left;
+}
+.tabOptions{
   width: 25vh;
-  padding: 0.5vh;
+  display: flex;
+  margin-left: 0.5vh;
+  justify-content: space-around;
   font: normal 2.2vh "San Francisco", sans-serif;
 }
 .All{
@@ -71,7 +76,7 @@ export default {
 }
 .messagesList {
   width: 100%;
-  height: 63.5vh;
+  height: var(--principalPage-Body-Height);
   display: flex;
   flex-direction: column;
   overflow-x: hidden;

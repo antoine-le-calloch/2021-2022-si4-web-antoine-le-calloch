@@ -1,7 +1,7 @@
 <template>
-  <div class="appHeader">
+<!--  <div class="appHeader">
     <h1>Chats</h1>
-  </div>
+  </div>-->
 </template>
 
 <script>

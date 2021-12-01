@@ -31,11 +31,11 @@ export default {
   margin-top: 1vh;
 }
 .hour{
-  font: bold 3vh "San Francisco", sans-serif;
+  font: bold 2vh "San Francisco", sans-serif;
 }
 .icons{
-  width: 13vh;
-  font-size: 3vh;
+  width: 9vh;
+  font-size: 2vh;
   display: flex;
   justify-content: space-between;
 }

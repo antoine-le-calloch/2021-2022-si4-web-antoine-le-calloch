@@ -1,7 +1,9 @@
 <template>
   <div class="messageCard">
-    <div class="message" v-touch:swipe.left="itemOnLeft" v-touch:swipe.right="itemOnRight" v-bind:class="{ messageOnLeft: elementOnLeft, messageOnRight: !elementOnLeft }">
-      <img v-bind:src="getImage" alt="profile image" height=100%>
+    <div v-touch:tap="clickOnMessage" class="message" v-touch:swipe.left="itemOnLeft" v-touch:swipe.right="itemOnRight" v-bind:class="{ messageOnLeft: elementOnLeft, messageOnRight: !elementOnLeft }">
+      <div class="image">
+        <img v-bind:src="getImage" alt="profile image">
+      </div>
       <div class="text">
         <template class="readMessage" v-if="isRead">
           <div class="title">{{getFullName}}</div>
@@ -41,18 +43,27 @@
       </div>
     </div>
   </div>
+  <div v-if="goToConversation">
+    <Conversations :message="message" v-on:goBack="goBackToMessages"></Conversations>
+  </div>
 </template>
 
 <script>
+import Conversations from "./Conversation";
+
 export default {
   name: "Message",
   props: {
     message : Object,
   },
+  components: {
+    Conversations
+  },
   data() {
     return {
       elementOnLeft : false,
-      seeSettings : false
+      seeSettings : false,
+      goToConversation : false
     }
   },
   methods: {
@@ -69,6 +80,18 @@ export default {
     markAsReadOrNotRead() {
       this.elementOnLeft = false;
       this.$emit("updateReadEvent");
+    },
+    clickOnMessage() {
+      if(this.elementOnLeft)
+        this.elementOnLeft = false;
+      else{
+        if(!this.isRead)
+          this.$emit("updateReadEvent");
+        this.goToConversation = true;
+      }
+    },
+    goBackToMessages() {
+      this.goToConversation = false;
     }
   },
   computed: {
@@ -94,6 +117,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+router-link{
+}
 .messageCard{
   flex-shrink: 0;
   display: flex;
@@ -115,12 +140,23 @@ export default {
   background: white;
   user-select: none;
   position: relative;
+  text-decoration: none;
+  color: black;
 }
-img {
+.image {
+  flex-shrink: 0;
   width: 9vh;
   height: 9vh;
-  border-radius: 4.5vh;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 5vh;
   margin: 0.6vh;
+}
+img{
+  min-width: 9vh;
+  min-height: 9vh;
+  flex-shrink: 0;
 }
 .text{
   min-width: 0;
@@ -128,8 +164,7 @@ img {
 }
 .title {
   font: normal 3vh "San Francisco", sans-serif;
-  margin: 0.2vh;
-  margin-top: 1.5vh;
+  margin: 1.5vh 0.2vh 0.2vh;
 }
 .msg {
   font: normal 2vh "San Francisco", sans-serif;
