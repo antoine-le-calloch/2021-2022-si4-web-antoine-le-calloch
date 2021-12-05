@@ -12,6 +12,11 @@ export const messagesModule = {
             if(!state.messages.length)
                 state.messages = payload
         },
+        delMessages: (state, id) => {
+            state.messages = state.messages.filter(function(message) {
+                return message.id !== id
+            })
+        }
     },
     getters: {
         numberOfUnreadMessages: (state) =>{
@@ -25,6 +30,15 @@ export const messagesModule = {
             }
             state.messages.sort(compareDates);
             return state.messages;
+        },
+        getMessageWithId: (state) => (messageId) =>{
+            let messageById;
+            state.messages.forEach(message => {
+                if((message.id === messageId)) {
+                    messageById = message;
+                }
+            })
+            return messageById;
         }
     },
     actions: {

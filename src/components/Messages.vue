@@ -14,8 +14,7 @@
       <Message v-for="currentMessage in messages"
                :key="currentMessage.id"
                :message="currentMessage"
-               v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"
-               v-on:del="del(currentMessage)"/>
+               v-on:updateReadEvent="markAsReadOrNotRead(currentMessage)"/>
     </div>
   </div>
 </template>
@@ -35,9 +34,6 @@ export default {
   methods: {
     markAsReadOrNotRead(message){
       message.read = !message.read;
-    },
-    del(message){
-      console.log("Le message " + message.id + " est supprimé");
     }
   },
   computed: {

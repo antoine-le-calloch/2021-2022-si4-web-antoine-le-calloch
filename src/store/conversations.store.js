@@ -9,8 +9,9 @@ export const conversationsModule = {
     },
     mutations: {
         setConversations: (state, payload) => {
-            if(!state.conversations.length)
+            if (!state.conversations.size) {
                 state.conversations = payload;
+            }
         },
         addSmsToOneConversation: (state, payload) => {
             state.conversations.get(payload.id).push({

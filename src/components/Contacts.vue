@@ -21,7 +21,7 @@ import Contact from "./Contact.vue";
 export default {
   name: "Contacts",
   components: {
-    Contact,
+    Contact
   },
   created(){
     this.$store.dispatch('setContacts');

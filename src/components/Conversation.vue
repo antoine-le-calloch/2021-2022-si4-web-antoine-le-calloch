@@ -41,34 +41,34 @@
 
 <script>
 import Sms from "./Sms"
+import router from "@/router";
 
 export default {
   name: "Conversation",
-  props: {
-    message : Object,
-  },
   components: {
     Sms
   },
   data() {
     return{
-      text : ""
+      text : "",
+      messageId : this.$route.params.id,
+      message : this.$store.getters.getMessageWithId(this.$route.params.id)
     }
   },
   methods: {
     goBackToMessages(){
-      this.$emit("goBack");
+      router.push({ path: `/principalPage/messages` });
     },
     sendSms(){
       this.$store.commit("addSmsToOneConversation", {
-        id: this.message.id,
+        id: this.messageId,
         txt: this.text
       });
       this.text = "";
     },
     thumbsTap(){
       this.$store.commit("addSmsToOneConversation", {
-        id: this.message.id,
+        id: this.messageId,
         txt: 0
       });
     }
@@ -84,7 +84,7 @@ export default {
       return this.$store.getters.numberOfUnreadMessages;
     },
     allSms(){
-      return this.$store.getters.OneSortedConversation(this.message.id);
+      return this.$store.getters.OneSortedConversation(this.messageId);
     }
   }
 };
@@ -132,8 +132,8 @@ export default {
 }
 .profileImage {
   flex-shrink: 0;
-  width: 4vh;
-  height: 4vh;
+  width: 5vh;
+  height: 5vh;
   display: flex;
   justify-content: center;
   overflow: hidden;

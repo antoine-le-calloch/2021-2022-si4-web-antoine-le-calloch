@@ -55,6 +55,7 @@ export default {
   border-radius: 10vh;
   background-color: var(--sms-back-color);
   font: normal 3vh "San Francisco", sans-serif;
+  overflow-wrap: break-word;
 }
 .thumbs{
   color: #1e78ff;

@@ -43,13 +43,10 @@
       </div>
     </div>
   </div>
-  <div v-if="goToConversation">
-    <Conversations :message="message" v-on:goBack="goBackToMessages"></Conversations>
-  </div>
 </template>
 
 <script>
-import Conversations from "./Conversation";
+import router from "@/router";
 
 export default {
   name: "Message",
@@ -57,13 +54,11 @@ export default {
     message : Object,
   },
   components: {
-    Conversations
   },
   data() {
     return {
       elementOnLeft : false,
-      seeSettings : false,
-      goToConversation : false
+      seeSettings : false
     }
   },
   methods: {
@@ -75,7 +70,7 @@ export default {
     },
     del() {
       this.elementOnLeft = false;
-      this.$emit("del");
+      this.$store.commit('delMessages', this.message.id);
     },
     markAsReadOrNotRead() {
       this.elementOnLeft = false;
@@ -87,14 +82,14 @@ export default {
       else{
         if(!this.isRead)
           this.$emit("updateReadEvent");
-        this.goToConversation = true;
+        router.push({ path: `/conversation/${this.getId}` });
       }
-    },
-    goBackToMessages() {
-      this.goToConversation = false;
     }
   },
   computed: {
+    getId(){
+      return this.message.id;
+    },
     getFullName(){
       return this.message.sender.name;
     },
@@ -117,8 +112,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-router-link{
-}
 .messageCard{
   flex-shrink: 0;
   display: flex;

@@ -18,7 +18,7 @@ const routes = [
             }
         ]
     },
-    { path: '/conversation', component: Conversation}
+    { path: '/conversation/:id', component: Conversation}
 ]
 
 const router = createRouter({
