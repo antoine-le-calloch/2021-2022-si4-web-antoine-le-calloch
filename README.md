@@ -18,7 +18,7 @@ Functionality :
 ![Presentation_conversations](https://github.com/antoine-le-calloch/2021-2022-si4-web-antoine-le-calloch/assets/71392407/de5eedf2-6167-49b2-add7-e1aa47b2fde2 | width=100)
 
 - Display all contacts.
-![Presentation_contacts](https://github.com/antoine-le-calloch/2021-2022-si4-web-antoine-le-calloch/assets/71392407/73280532-dec5-400d-8ca7-6f9f8dc90042)
+![Presentation_contacts](https://github.com/antoine-le-calloch/2021-2022-si4-web-antoine-le-calloch/presentation_images/Presentation_contacts.png)
 
 - After clicking on a conversation, you can see all the messages sent or received. Arrow at the top left of conversations to return to the list of messages
 ![Presentation_messages](https://github.com/antoine-le-calloch/2021-2022-si4-web-antoine-le-calloch/assets/71392407/c47cf485-257b-4b37-96a2-57b23081bd37)
