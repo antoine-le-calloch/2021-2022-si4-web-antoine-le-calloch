@@ -1,4 +1,5 @@
-import axios from "axios";
+//import axios from "axios";
+import { contactsMock } from '@/mocks/contacts.mock';
 
 export const contactsModule = {
     namespace: false,
@@ -18,11 +19,13 @@ export const contactsModule = {
     actions: {
         async setContacts(context){
             try{
-                const response = await axios.get("https://io-labs.fr/messenger/contacts.json");
-                context.commit('setContacts', response.data);
+                //const response = await axios.get("https://io-labs.fr/messenger/contacts.json"); // Import from web
+                //context.commit('setContacts', response.data);
+
+                context.commit('setContacts', contactsMock); // Import from local mock file
             }
             catch (error){
-                console.log('error: ', error);
+                console.log('error get contacts : ', error);
             }
         }
     }

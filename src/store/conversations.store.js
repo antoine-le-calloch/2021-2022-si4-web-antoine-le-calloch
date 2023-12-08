@@ -43,7 +43,7 @@ export const conversationsModule = {
                 context.commit('setConversations', conversations);
             }
             catch (error){
-                console.log('error: ', error);
+                console.log('error get conversations : ', error);
             }
         }
     }

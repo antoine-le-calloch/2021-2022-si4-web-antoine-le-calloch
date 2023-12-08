@@ -1,4 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
+import { messagesMock } from '@/mocks/messages.mock';
+
 
 export const messagesModule = {
     namespace: false,
@@ -44,11 +46,13 @@ export const messagesModule = {
     actions: {
         async setMessages(context){
             try{
-                const response = await axios.get("https://io-labs.fr/messenger/messages.json");
-                context.commit('setMessages', response.data);
+                //const response = await axios.get("https://io-labs.fr/messenger/messages.json"); // Import from web
+                // context.commit('setMessages', response.data); // Import from local mock file
+
+                context.commit('setMessages', messagesMock); // Import from local mock file
             }
             catch (error){
-                console.log('error: ', error);
+                console.log('error get messages : ', error);
             }
         }
     }
