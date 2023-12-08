@@ -1,19 +1,19 @@
-SI4 WEB project : Message application
+<h1>SI4 WEB project : Message application</h1>
 
-Project setup
+<h2>Project setup</h2>
 
 	npm install
 
-Compiles and hot-reloads for development
+<h2>Compiles and hot-reloads for development</h2>
 
 	npm run serve
 
-Compiles and minifies for production
+<h2>Compiles and minifies for production</h2>
 
 	npm run build
 
-Functionality :
-- Display all conversations with the latest on the top and the not read in bold.
+<h2>Functionality :</h2>
+- Display all conversations with the latest on the top and the not read in bold.<br>
 <img src="https://github.com/antoine-le-calloch/2021-2022-si4-web-antoine-le-calloch/assets/71392407/297d7655-a67d-4233-b27e-5d34c08d3888" data-canonical-src="https://github.com/antoine-le-calloch/2021-2022-si4-web-antoine-le-calloch/assets/71392407/297d7655-a67d-4233-b27e-5d34c08d3888" width="350" />
 
 - Display all contacts.
